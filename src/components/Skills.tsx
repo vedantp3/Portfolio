@@ -4,7 +4,7 @@ import {
 } from 'react-icons/fa';
 import {
     SiTypescript, SiCplusplus, SiC, SiR, SiMysql, SiPostgresql, SiMongodb, SiSupabase,
- SiFlask, SiDjango, SiTailwindcss,
+    SiFlask, SiDjango, SiTailwindcss,
     SiPandas, SiNumpy, SiPytorch, SiTensorflow, SiScikitlearn, SiOpencv, SiLangchain
 } from 'react-icons/si';
 import { TbBrandFramerMotion, TbBrandVscode } from 'react-icons/tb';
@@ -29,14 +29,14 @@ const skillsData = [
         category: "Frameworks & Libraries",
         items: [
             { name: "React", icon: FaReact, color: "#61DAFB" },
-            
+
             { name: "Node.js", icon: FaNodeJs, color: "#339933" },
-            
+
             { name: "Flask", icon: SiFlask, color: "#000000" },
             { name: "Django", icon: SiDjango, color: "#092E20" },
             { name: "Tailwind CSS", icon: SiTailwindcss, color: "#06B6D4" },
             { name: "Framer Motion", icon: TbBrandFramerMotion, color: "#0055FF" },
-            
+
             { name: "Pandas", icon: SiPandas, color: "#150458" },
             { name: "NumPy", icon: SiNumpy, color: "#013243" }
         ]
@@ -82,7 +82,7 @@ const MarqueeRow = ({ items, direction = "left", speed = 20 }: { items: any[], d
                         key={index}
                         className="px-6 py-3 bg-white/5 border border-white/10 rounded-xl backdrop-blur-sm hover:bg-white/10 hover:border-primary/50 transition-colors cursor-default flex items-center gap-3 group/item"
                     >
-                        <skill.icon className="w-6 h-6 text-gray-400 group-hover/item:text-[var(--color)] transition-colors" style={{ '--color': skill.color } as any} />
+                        <skill.icon className="w-6 h-6 transition-transform group-hover/item:scale-110" style={{ color: skill.color }} />
                         <span className="text-gray-300 font-medium text-lg group-hover/item:text-white transition-colors whitespace-nowrap">
                             {skill.name}
                         </span>

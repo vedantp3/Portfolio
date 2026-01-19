@@ -4,6 +4,8 @@ import About from './components/About';
 import Experience from './components/Experience';
 import Projects from './components/Projects';
 import Skills from './components/Skills';
+import Activities from './components/Activities';
+import Certifications from './components/Certifications';
 import Contact from './components/Contact';
 
 function App() {
@@ -15,6 +17,8 @@ function App() {
       <Experience />
       <Projects />
       <Skills />
+      <Activities />
+      <Certifications />
       <Contact />
 
       <footer className="py-8 text-center text-gray-500 text-sm bg-dark">

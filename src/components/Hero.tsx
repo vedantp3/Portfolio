@@ -56,7 +56,16 @@ const Hero = () => {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8 }}
+                    className="flex flex-col items-center"
                 >
+                    {/* Open to Work Badge */}
+                    <div className="inline-flex items-center gap-2 px-4 py-2 mb-6 bg-emerald-500/10 border border-emerald-500/30 rounded-full backdrop-blur-sm">
+                        <span className="relative flex h-3 w-3">
+                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                            <span className="relative inline-flex rounded-full h-3 w-3 bg-emerald-500"></span>
+                        </span>
+                        <span className="text-emerald-400 font-medium text-sm">Open to Work</span>
+                    </div>
                     <h2 className="text-xl md:text-2xl text-primary font-mono mb-4">Hello, I'm</h2>
                 </motion.div>
 
