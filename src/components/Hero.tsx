@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Github, Linkedin, Mail, ChevronDown, Download } from 'lucide-react';
+import { Github, Linkedin, Mail, ChevronDown, Download, Eye } from 'lucide-react';
 import { useState, useEffect } from 'react';
 
 const Hero = () => {
@@ -100,14 +100,25 @@ const Hero = () => {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8, delay: 0.8 }}
                 >
-                    <a
-                        href="/resume.pdf"
-                        download="Vedant_Patil_Resume.pdf"
-                        className="inline-flex items-center gap-2 px-8 py-3 bg-gradient-to-r from-primary to-secondary rounded-full text-white font-bold hover:opacity-90 transition-opacity shadow-[0_0_20px_rgba(0,242,255,0.3)] hover:shadow-[0_0_30px_rgba(0,242,255,0.5)]"
-                    >
-                        <Download className="w-5 h-5" />
-                        Download Resume
-                    </a>
+                    <div className="flex flex-wrap justify-center gap-4">
+                        <a
+                            href="/resume.pdf"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-2 px-8 py-3 bg-white/5 border border-primary/50 rounded-full text-white font-bold hover:bg-white/10 transition-all hover:border-primary"
+                        >
+                            <Eye className="w-5 h-5" />
+                            View Resume
+                        </a>
+                        <a
+                            href="/resume.pdf"
+                            download="Vedant_Patil_Resume.pdf"
+                            className="inline-flex items-center gap-2 px-8 py-3 bg-gradient-to-r from-primary to-secondary rounded-full text-white font-bold hover:opacity-90 transition-opacity shadow-[0_0_20px_rgba(0,242,255,0.3)] hover:shadow-[0_0_30px_rgba(0,242,255,0.5)]"
+                        >
+                            <Download className="w-5 h-5" />
+                            Download Resume
+                        </a>
+                    </div>
                 </motion.div>
             </div>
 
