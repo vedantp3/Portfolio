@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Mail, Phone, MapPin, Github, Linkedin, Send } from 'lucide-react';
+import { Mail, Phone, MapPin, Github, Linkedin, Send, CheckCircle, AlertCircle } from 'lucide-react';
 import { useState } from 'react';
 
 const Contact = () => {
@@ -8,15 +8,48 @@ const Contact = () => {
         email: '',
         message: ''
     });
+    const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
+    const [statusMessage, setStatusMessage] = useState('');
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        const { name, email, message } = formData;
+        setStatus('loading');
 
-        const subject = `Portfolio Contact from ${name}`;
-        const body = `Name: ${name}%0AEmail: ${email}%0A%0AMessage:%0A${message}`;
+        try {
+            const response = await fetch('https://api.web3forms.com/submit', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    access_key: 'd42df483-0dea-4e27-8da0-a1fefa718096', // Replace with your Web3Forms access key
+                    name: formData.name,
+                    email: formData.email,
+                    message: formData.message,
+                    subject: `Portfolio Contact from ${formData.name}`,
+                }),
+            });
 
-        window.location.href = `mailto:work.vedant0505@gmail.com?subject=${encodeURIComponent(subject)}&body=${body}`;
+            const result = await response.json();
+
+            if (result.success) {
+                setStatus('success');
+                setStatusMessage('Message sent successfully! I\'ll get back to you soon.');
+                setFormData({ name: '', email: '', message: '' });
+            } else {
+                setStatus('error');
+                setStatusMessage('Failed to send message. Please try again.');
+            }
+        } catch {
+            setStatus('error');
+            setStatusMessage('Something went wrong. Please try again later.');
+        }
+
+        // Reset status after 5 seconds
+        setTimeout(() => {
+            setStatus('idle');
+            setStatusMessage('');
+        }, 5000);
     };
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -126,10 +159,44 @@ const Contact = () => {
                                 required
                             />
                         </div>
-                        <button className="w-full bg-gradient-to-r from-primary to-secondary text-white font-bold py-3 rounded-lg hover:opacity-90 transition-opacity flex items-center justify-center gap-2">
-                            Send Message
-                            <Send className="w-4 h-4" />
+                        <button
+                            type="submit"
+                            disabled={status === 'loading'}
+                            className={`w-full font-bold py-3 rounded-lg transition-all flex items-center justify-center gap-2 ${status === 'loading'
+                                ? 'bg-gray-600 cursor-not-allowed'
+                                : 'bg-gradient-to-r from-primary to-secondary hover:opacity-90'
+                                } text-white`}
+                        >
+                            {status === 'loading' ? (
+                                <>
+                                    <svg className="animate-spin h-5 w-5" viewBox="0 0 24 24">
+                                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
+                                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+                                    </svg>
+                                    Sending...
+                                </>
+                            ) : (
+                                <>
+                                    Send Message
+                                    <Send className="w-4 h-4" />
+                                </>
+                            )}
                         </button>
+
+                        {/* Status Message */}
+                        {statusMessage && (
+                            <div className={`flex items-center gap-2 p-3 rounded-lg ${status === 'success'
+                                ? 'bg-emerald-500/10 border border-emerald-500/30 text-emerald-400'
+                                : 'bg-red-500/10 border border-red-500/30 text-red-400'
+                                }`}>
+                                {status === 'success' ? (
+                                    <CheckCircle className="w-5 h-5 flex-shrink-0" />
+                                ) : (
+                                    <AlertCircle className="w-5 h-5 flex-shrink-0" />
+                                )}
+                                <span className="text-sm">{statusMessage}</span>
+                            </div>
+                        )}
                     </motion.form>
                 </div>
             </div>
