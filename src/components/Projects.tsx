@@ -13,8 +13,8 @@ const projects = [
             "Human-in-the-Loop feedback system",
             "Rate limit handling with exponential backoff"
         ],
-        link: "#",
-        github: "#"
+        link: "https://github.com/vedantp3/Multimodal-Math-Mentor",
+        github: "https://github.com/vedantp3/Multimodal-Math-Mentor"
     },
     {
         title: "RAG-Based Personalized Chatbot",
